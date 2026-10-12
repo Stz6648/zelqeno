@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZELQENO — Luxury Price Intelligence</title>
+  <meta name="description" content="Discover luxury fashion, compare retailer offers, and find smarter ways to shop designer brands with ZELQENO.">
+  <meta name="theme-color" content="#f7f5f1">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">A smarter way to discover luxury — our full retailer price data is coming soon.</div>
+  <header class="header">
+    <a class="wordmark" href="#" aria-label="ZELQENO home">ZELQENO<span>®</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#brands">Designers</a>
+      <a href="#discover">Discover</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <a class="header-link" href="#discover">Explore <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker"><span class="kicker-line"></span> LUXURY PRICE INTELLIGENCE</p>
+        <h1>Luxury, found<br><em>more intelligently.</em></h1>
+        <p class="intro">Discover designer pieces, explore trusted retailers and make a more informed choice before you buy.</p>
+        <form class="search-form" id="searchForm" role="search">
+          <label class="sr-only" for="searchInput">Search brands or products</label>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search a brand or product…" autocomplete="off">
+          <button type="submit">Search <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="search-note">Explore designer fashion across a growing range of brands.</p>
+      </div>
+      <div class="hero-art" role="img" aria-label="Editorial still life of a luxury handbag and accessories">
+        <div class="art-frame">
+          <div class="sun-disc"></div>
+          <div class="arch arch-one"></div>
+          <div class="arch arch-two"></div>
+          <div class="pedestal"></div>
+          <div class="bag">
+            <div class="bag-handle"></div><div class="bag-flap"></div><div class="bag-clasp"></div>
+          </div>
+          <div class="art-caption"><span>THE CONSIDERED EDIT</span><span>NO. 001</span></div>
+        </div>
+      </div>
+      <div class="hero-bottom"><span>INDEPENDENT DISCOVERY</span><span>BUILT FOR THE GLOBAL LUXURY SHOPPER</span></div>
+    </section>
+
+    <section class="brand-section section-wrap" id="brands">
+      <div class="section-heading">
+        <div><p class="kicker">THE DESIGNER DIRECTORY</p><h2>Names worth knowing.</h2></div>
+        <p>Start with a designer. Find your next favourite piece.</p>
+      </div>
+      <div class="brand-grid" id="brandGrid">
+        <button class="brand-tile" data-brand="Prada">PRADA <span>↗</span></button>
+        <button class="brand-tile" data-brand="Gucci">GUCCI <span>↗</span></button>
+        <button class="brand-tile" data-brand="Dior">DIOR <span>↗</span></button>
+        <button class="brand-tile" data-brand="Saint Laurent">SAINT LAURENT <span>↗</span></button>
+        <button class="brand-tile" data-brand="Moncler">MONCLER <span>↗</span></button>
+        <button class="brand-tile" data-brand="Loewe">LOEWE <span>↗</span></button>
+        <button class="brand-tile" data-brand="Bottega Veneta">BOTTEGA VENETA <span>↗</span></button>
+        <button class="brand-tile" data-brand="Burberry">BURBERRY <span>↗</span></button>
+      </div>
+    </section>
+
+    <section class="discover-section" id="discover">
+      <div class="section-wrap">
+        <div class="section-heading">
+          <div><p class="kicker">A FIRST LOOK</p><h2>Discover the edit.</h2></div>
+          <div class="filters" aria-label="Product filters">
+            <button class="filter active" data-filter="All">All pieces</button>
+            <button class="filter" data-filter="Bags">Bags</button>
+            <button class="filter" data-filter="Ready-to-wear">Ready-to-wear</button>
+            <button class="filter" data-filter="Shoes">Shoes</button>
+          </div>
+        </div>
+        <div class="notice" id="dataNotice"><span class="notice-dot"></span> Preview collection — these are illustrative examples, not live prices or retailer offers.</div>
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden>No matching pieces found. Try another search or designer.</div>
+      </div>
+    </section>
+
+    <section class="manifesto section-wrap" id="how">
+      <div class="manifesto-title"><p class="kicker">THE ZELQENO APPROACH</p><h2>Better context.<br><em>Better choices.</em></h2></div>
+      <div class="steps">
+        <article><span>01 / DISCOVER</span><h3>Find what you love.</h3><p>Search by designer, category or product to narrow the field.</p></article>
+        <article><span>02 / COMPARE</span><h3>See the bigger picture.</h3><p>Our planned comparison tools will bring eligible retailer offers together in one place.</p></article>
+        <article><span>03 / DECIDE</span><h3>Shop with confidence.</h3><p>Review the offer and continue to the retailer when live partner links become available.</p></article>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="newsletter-inner">
+        <p class="kicker">THE CONSIDERED INBOX</p>
+        <h2>Good finds.<br><em>Less guesswork.</em></h2>
+        <p>ZELQENO is in development. We’re building a clearer way to explore luxury shopping.</p>
+        <a class="button-light" href="mailto:hello@zelqeno.com?subject=ZELQENO%20launch%20updates">Contact us <span>↗</span></a>
+      </div>
+      <div class="newsletter-mark" aria-hidden="true">Z.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top"><a class="wordmark footer-wordmark" href="#">ZELQENO<span>®</span></a><p>Luxury discovery, with a clearer point of view.</p></div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> ZELQENO. All rights reserved.</span>
+      <div><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="affiliate-disclosure.html">Affiliate disclosure</a><a href="mailto:hello@zelqeno.com">Contact</a></div>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
