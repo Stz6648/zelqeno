@@ -158,6 +158,14 @@ if (searchForm && searchInput) {
     currentQuery = searchInput.value;
     renderProducts();
   });
+
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape" && searchInput.value) {
+      searchInput.value = "";
+      currentQuery = "";
+      renderProducts();
+    }
+  });
 }
 
 document.querySelectorAll(".brand-tile").forEach(button => {
