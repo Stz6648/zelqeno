@@ -6,7 +6,7 @@
     {
       "id": "prada-preview-001",
       "brand": "Prada",
-      "name": "Prada luxury fashion preview",
+      "name": "Prada shoulder bag preview",
       "category": "Designer Bags",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
@@ -20,8 +20,8 @@
     {
       "id": "saint-laurent-preview-001",
       "brand": "Saint Laurent",
-      "name": "Saint Laurent luxury fashion preview",
-      "category": "Designer Bags",
+      "name": "Saint Laurent tailored outerwear preview",
+      "category": "Designer Clothing",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
       "price": null,
@@ -34,7 +34,7 @@
     {
       "id": "gucci-preview-001",
       "brand": "Gucci",
-      "name": "Gucci luxury fashion preview",
+      "name": "Gucci leather bag preview",
       "category": "Designer Bags",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
@@ -48,8 +48,8 @@
     {
       "id": "bottega-veneta-preview-001",
       "brand": "Bottega Veneta",
-      "name": "Bottega Veneta luxury fashion preview",
-      "category": "Designer Bags",
+      "name": "Bottega Veneta woven leather wallet preview",
+      "category": "Accessories",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
       "price": null,
@@ -62,8 +62,8 @@
     {
       "id": "burberry-preview-001",
       "brand": "Burberry",
-      "name": "Burberry luxury fashion preview",
-      "category": "Designer Clothing",
+      "name": "Burberry silk scarf preview",
+      "category": "Accessories",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
       "price": null,
@@ -76,7 +76,7 @@
     {
       "id": "dior-preview-001",
       "brand": "Dior",
-      "name": "Dior luxury fashion preview",
+      "name": "Dior structured bag preview",
       "category": "Designer Bags",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
@@ -90,7 +90,7 @@
     {
       "id": "loewe-preview-001",
       "brand": "Loewe",
-      "name": "Loewe luxury fashion preview",
+      "name": "Loewe structured leather bag preview",
       "category": "Designer Bags",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
@@ -104,7 +104,7 @@
     {
       "id": "moncler-preview-001",
       "brand": "Moncler",
-      "name": "Moncler luxury fashion preview",
+      "name": "Moncler quilted outerwear preview",
       "category": "Designer Clothing",
       "description": "Illustrative product concept for the ZELQENO preview catalogue.",
       "image_url": "",
