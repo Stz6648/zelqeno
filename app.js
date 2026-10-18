@@ -1,3 +1,5 @@
+"use strict";
+
 let products = [];
 let activeFilter = "All";
 let currentQuery = "";
@@ -16,9 +18,10 @@ const visualDefaults = [
 ];
 
 function normalizeCategory(category = "") {
-  const value = category.toLowerCase();
+  const value = String(category).toLowerCase();
 
   if (value.includes("bag")) return "Bags";
+  if (value.includes("shoe")) return "Shoes";
 
   if (
     value.includes("clothing") ||
@@ -28,7 +31,6 @@ function normalizeCategory(category = "") {
     return "Ready-to-wear";
   }
 
-  if (value.includes("shoe")) return "Shoes";
   if (value.includes("accessor")) return "Accessories";
 
   return category || "Accessories";
@@ -58,18 +60,22 @@ function prepareProduct(product, index) {
 }
 
 function renderProducts() {
+  if (!grid || !empty || !count) {
+    console.error("ZELQENO: Required product-grid elements are missing.");
+    return;
+  }
+
+  const query = currentQuery.trim().toLowerCase();
+
   const filtered = products.filter(product => {
     const matchesFilter =
       activeFilter === "All" ||
       product.category === activeFilter;
 
-    const query = currentQuery.trim().toLowerCase();
-
     const searchable =
       `${product.brand} ${product.name} ${product.category}`.toLowerCase();
 
-    return matchesFilter &&
-      (!query || searchable.includes(query));
+    return matchesFilter && (!query || searchable.includes(query));
   });
 
   grid.innerHTML = filtered.map(product => `
@@ -79,24 +85,13 @@ function renderProducts() {
         <div class="shape ${escapeHTML(product.shape)}"
              aria-hidden="true"></div>
       </div>
-
       <div class="product-info">
-        <div class="product-brand">
-          ${escapeHTML(product.brand)}
-        </div>
-
-        <h3 class="product-name">
-          ${escapeHTML(product.name)}
-        </h3>
-
-        <div class="product-category">
-          ${escapeHTML(product.category)}
-        </div>
-
+        <div class="product-brand">${escapeHTML(product.brand)}</div>
+        <h3 class="product-name">${escapeHTML(product.name)}</h3>
+        <div class="product-category">${escapeHTML(product.category)}</div>
         <div class="product-price">
           Live retailer pricing <strong>coming soon</strong>
         </div>
-
         <span class="preview-tag">Explore concept ↗</span>
       </div>
     </article>
@@ -105,70 +100,76 @@ function renderProducts() {
   empty.hidden = filtered.length > 0;
 
   count.textContent =
-    `${filtered.length} preview ${
-      filtered.length === 1 ? "piece" : "pieces"
-    }`;
+    `${filtered.length} of ${products.length} preview pieces`;
 }
 
 async function loadProducts() {
+  count.textContent = "Loading products…";
+
   try {
     const response = await fetch(
-      "./zelqeno-products.json",
+      new URL("./zelqeno-products.json", document.baseURI).href,
       { cache: "no-store" }
     );
 
     if (!response.ok) {
-      throw new Error(`Catalogue loading failed: ${response.status}`);
+      throw new Error(`JSON request failed: HTTP ${response.status}`);
     }
 
     const catalogue = await response.json();
 
-    if (!Array.isArray(catalogue.products)) {
-      throw new Error("Invalid catalogue format.");
+    if (!catalogue || !Array.isArray(catalogue.products)) {
+      throw new Error('JSON must contain a "products" array.');
     }
 
     products = catalogue.products.map(prepareProduct);
+
+    console.info(`ZELQENO: Loaded ${products.length} products.`);
     renderProducts();
 
   } catch (error) {
-    console.error("ZELQENO catalogue error:", error);
+    console.error("ZELQENO product loading failed:", error);
 
+    products = [];
     grid.innerHTML = "";
     empty.hidden = false;
-    count.textContent = "Catalogue temporarily unavailable";
+    count.textContent = "Unable to load products. Please try again.";
   }
 }
 
-document.getElementById("searchForm").addEventListener("submit", event => {
-  event.preventDefault();
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
 
-  currentQuery = document.getElementById("searchInput").value;
+if (searchForm && searchInput) {
+  searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+    currentQuery = searchInput.value;
+    renderProducts();
 
-  renderProducts();
-
-  document.getElementById("discover").scrollIntoView({
-    behavior: "smooth"
+    document.getElementById("discover")?.scrollIntoView({
+      behavior: "smooth"
+    });
   });
-});
+}
 
 document.querySelectorAll(".brand-tile").forEach(button => {
   button.addEventListener("click", () => {
-    currentQuery = button.dataset.brand;
-
-    document.getElementById("searchInput").value = currentQuery;
+    currentQuery = button.dataset.brand || "";
+    if (searchInput) searchInput.value = currentQuery;
 
     activeFilter = "All";
 
     document.querySelectorAll(".filter").forEach(filterButton => {
+      const value = filterButton.dataset.filter;
       filterButton.classList.toggle(
         "active",
-        filterButton.dataset.filter === "All"
+        value === "All" || value === "all"
       );
     });
 
     renderProducts();
 
-    document.getElementById("discover").scrollIntoView({
+    document.getElementById("discover")?.scrollIntoView({
       behavior: "smooth"
     });
   });
@@ -176,16 +177,22 @@ document.querySelectorAll(".brand-tile").forEach(button => {
 
 document.querySelectorAll(".filter").forEach(button => {
   button.addEventListener("click", () => {
-   activeFilter =
-  button.dataset.filter.toLowerCase() === "all pieces" ||
-  button.dataset.filter.toLowerCase() === "all"
-    ? "All"
-    : button.dataset.filter;
+    const value = (button.dataset.filter || "All").trim();
+
+    activeFilter =
+      value.toLowerCase() === "all" ||
+      value.toLowerCase() === "all pieces"
+        ? "All"
+        : normalizeCategory(value);
 
     document.querySelectorAll(".filter").forEach(filterButton => {
+      const filterValue = (filterButton.dataset.filter || "").toLowerCase();
+
       filterButton.classList.toggle(
         "active",
-        filterButton === button
+        filterButton === button ||
+        (activeFilter === "All" &&
+          (filterValue === "all" || filterValue === "all pieces"))
       );
     });
 
@@ -193,7 +200,9 @@ document.querySelectorAll(".filter").forEach(button => {
   });
 });
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+const yearElement = document.getElementById("year");
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
 
 loadProducts();
