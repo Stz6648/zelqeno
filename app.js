@@ -11,7 +11,7 @@ const count = document.getElementById("resultCount");
 const visualDefaults = [
   { shape: "bag-shape", tone: "tone-1" },
   { shape: "coat-shape", tone: "tone-2" },
-  { shape: "shoe-shape", tone: "tone-3" },
+  { shape: "wallet-shape", tone: "tone-3" },
   { shape: "wallet-shape", tone: "tone-4" },
   { shape: "scarf-shape", tone: "tone-5" },
   { shape: "sunglasses-shape", tone: "tone-6" }
@@ -98,6 +98,9 @@ function renderProducts() {
   `).join("");
 
   empty.hidden = filtered.length > 0;
+  empty.textContent = query
+    ? `No matching pieces for "${currentQuery.trim()}". Try another brand or product.`
+    : "No pieces are available in this category yet.";
 
   count.textContent =
     `${filtered.length} of ${products.length} preview pieces`;
@@ -149,6 +152,11 @@ if (searchForm && searchInput) {
     document.getElementById("discover")?.scrollIntoView({
       behavior: "smooth"
     });
+  });
+
+  searchInput.addEventListener("input", () => {
+    currentQuery = searchInput.value;
+    renderProducts();
   });
 }
 
