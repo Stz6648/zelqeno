@@ -176,7 +176,11 @@ document.querySelectorAll(".brand-tile").forEach(button => {
 
 document.querySelectorAll(".filter").forEach(button => {
   button.addEventListener("click", () => {
-    activeFilter = button.dataset.filter;
+   activeFilter =
+  button.dataset.filter.toLowerCase() === "all pieces" ||
+  button.dataset.filter.toLowerCase() === "all"
+    ? "All"
+    : button.dataset.filter;
 
     document.querySelectorAll(".filter").forEach(filterButton => {
       filterButton.classList.toggle(
